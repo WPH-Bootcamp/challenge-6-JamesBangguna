@@ -25,3 +25,36 @@ ${index + 1}. ${book.title}
 `);
   });
 }
+
+// Function untuk mencari buku
+export function searchBook(title?: string): void {
+  console.log('\n===== HASIL PENCARIAN =====');
+
+  // Jika title tidak diberikan
+  if (!title) {
+    console.log('Keyword tidak diberikan. Menampilkan semua buku:\n');
+
+    listBooks();
+    return;
+  }
+
+  // Cari buku berdasarkan title
+  const filteredBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(title.toLowerCase())
+  );
+
+  // Jika tidak ditemukan
+  if (filteredBooks.length === 0) {
+    console.log(`Buku dengan keyword "${title}" tidak ditemukan.`);
+    return;
+  }
+
+  // Tampilkan hasil
+  filteredBooks.forEach((book, index) => {
+    console.log(`
+${index + 1}. ${book.title}
+   Penulis : ${book.author}
+   Tahun   : ${book.publicationYear}
+`);
+  });
+}
